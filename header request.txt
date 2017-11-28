@@ -1,0 +1,88 @@
+ 
+// Tag used to cancel the request
+String tag_json_obj = "json_obj_req";
+ 
+String url = "https://api.androidhive.info/volley/person_object.json";
+         
+ProgressDialog pDialog = new ProgressDialog(this);
+pDialog.setMessage("Loading...");
+pDialog.show();     
+         
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.POST,
+                url, null,
+                new Response.Listener<JSONObject>() {
+ 
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+ 
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                        pDialog.hide();
+                    }
+                }) {
+ 
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", "Androidhive");
+                params.put("email", "abc@androidhive.info");
+                params.put("password", "password123");
+ 
+                return params;
+            }
+ 
+        };
+ 
+// Adding request to request queue
+AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);
+5. Adding request headers
+
+Just like adding request parameters, to send request headers, we have to override getHeaders(). In below example I am sending Content-Type and apiKey in request headers.
+
+// Tag used to cancel the request
+String tag_json_obj = "json_obj_req";
+ 
+String url = "https://api.androidhive.info/volley/person_object.json";
+         
+ProgressDialog pDialog = new ProgressDialog(this);
+pDialog.setMessage("Loading...");
+pDialog.show();     
+         
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.POST,
+                url, null,
+                new Response.Listener<JSONObject>() {
+ 
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d(TAG, response.toString());
+                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+ 
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        VolleyLog.d(TAG, "Error: " + error.getMessage());
+                        pDialog.hide();
+                    }
+                }) {
+ 
+            /**
+             * Passing some request headers
+             * */
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("Content-Type", "application/json");
+                headers.put("apiKey", "xxxxxxxxxxxxxxx");
+                return headers;
+            }
+ 
+        };
+ 
+// Adding request to request queue
+AppController.getInstance().addToRequestQueue(jsonObjReq, tag_json_obj);

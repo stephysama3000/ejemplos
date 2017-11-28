@@ -1,0 +1,12 @@
+platform :ios, ‘9.0’
+use_frameworks!
+
+target 'SlideMenuControllerSwift' do
+    pod 'NMPopUpViewSwift'
+    pod 'SwiftyJSON', :git => 'https://github.com/acegreen/SwiftyJSON.git', :branch => 'swift3'
+    pod 'Alamofire', '~> 4.0'
+    pod 'BSKeyboardControls', '~> 2.2'  
+    pod 'ActionSheetPicker-3.0'
+    pod 'Kanna', '~> 2.0.0'
+    pod 'PopupDialog', '~> 0.5'
+end
